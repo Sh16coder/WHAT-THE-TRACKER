@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Auth Section -->
+        <div id="auth-section" class="auth-section">
+            <div class="auth-container">
+                <div class="logo">📚 StudyTracker</div>
+                <h2>Track Your Study Progress</h2>
+                <div id="login-form">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button id="login-btn" class="btn">Login</button>
+                    <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+                </div>
+                <div id="signup-form" style="display: none;">
+                    <input type="text" id="signup-name" placeholder="Name" required>
+                    <input type="email" id="signup-email" placeholder="Email" required>
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <button id="signup-btn" class="btn">Sign Up</button>
+                    <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App (hidden until auth) -->
+        <div id="app-section" style="display: none;">
+            <header>
+                <h1>Study Tracker</h1>
+                <div class="header-right">
+                    <div class="share-container">
+                        <button id="share-btn" class="btn-small"><i class="fas fa-share-alt"></i> Share</button>
+                        <div id="share-panel" class="share-panel" style="display: none;">
+                            <input type="text" id="share-link" readonly>
+                            <button id="copy-link" class="btn-small">Copy</button>
+                            <div class="share-options">
+                                <span>Share to:</span>
+                                <a href="#" id="share-twitter" class="social-share"><i class="fab fa-twitter"></i></a>
+                                <a href="#" id="share-facebook" class="social-share"><i class="fab fa-facebook"></i></a>
+                                <a href="#" id="share-whatsapp" class="social-share"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="logout-btn" class="btn-small">Logout</button>
+                </div>
+            </header>
+
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" data-section="timer">Timer</a></li>
+                    <li><a href="#" class="nav-link" data-section="analytics">Analytics</a></li>
+                </ul>
+            </nav>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>Today</h3>
+                        <p id="today-time">0h 0m</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>This Week</h3>
+                        <p id="week-time">0h 0m</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total</h3>
+                        <p id="total-time">0h 0m</p>
+                    </div>
+                </div>
+                <div class="quick-start">
+                    <h3>Quick Start</h3>
+                    <div class="timer-options">
+                        <button class="btn" data-minutes="25">Pomodoro (25m)</button>
+                        <button class="btn" data-minutes="50">Deep Focus (50m)</button>
+                        <button class="btn" data-minutes="10">Quick Session (10m)</button>
+                    </div>
+                </div>
+                <div class="recent-sessions">
+                    <h3>Recent Sessions</h3>
+                    <ul id="recent-sessions-list"></ul>
+                </div>
+            </section>
+
+            <!-- Timer Section -->
+            <section id="timer" class="content-section" style="display: none;">
+                <div class="timer-container">
+                    <div class="timer-display">
+                        <span id="timer-minutes">25</span>:<span id="timer-seconds">00</span>
+                    </div>
+                    <div class="timer-controls">
+                        <button id="start-timer" class="btn">Start</button>
+                        <button id="pause-timer" class="btn" disabled>Pause</button>
+                        <button id="reset-timer" class="btn">Reset</button>
+                    </div>
+                    <div class="timer-mode">
+                        <button class="mode-btn active" data-mode="pomodoro">Pomodoro</button>
+                        <button class="mode-btn" data-mode="stopwatch">Stopwatch</button>
+                        <button class="mode-btn" data-mode="custom">Custom</button>
+                    </div>
+                    <div class="timer-settings" id="custom-timer" style="display: none;">
+                        <input type="number" id="custom-minutes" min="1" max="120" value="25">
+                        <span>minutes</span>
+                    </div>
+                    <div class="subject-selection">
+                        <select id="subject-select">
+                            <option value="">Select Subject</option>
+                            <option value="Math">Math</option>
+                            <option value="Science">Science</option>
+                            <option value="Language">Language</option>
+                            <option value="History">History</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="new-subject" placeholder="Or add new subject">
+                        <button id="add-subject" class="btn-small">Add</button>
+                    </div>
+                    <div class="notes-section">
+                        <textarea id="session-notes" placeholder="Add notes about this session..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="content-section" style="display: none;">
+                <div class="analytics-controls">
+                    <select id="time-period">
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="year">This Year</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="time-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="subject-chart"></canvas>
+                </div>
+                <div class="session-history">
+                    <h3>Session History</h3>
+                    <table id="sessions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Duration</th>
+                                <th>Subject</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sessions-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Public Profile Section (visible only when shared) -->
+            <section id="public-profile" class="content-section" style="display: none;">
+                <h2>Study Statistics</h2>
+                <div class="public-stats">
+                    <div class="stat-card">
+                        <h3>Total Study Time</h3>
+                        <p id="public-total-time">0h 0m</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Sessions</h3>
+                        <p id="public-session-count">0</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="public-time-chart"></canvas>
+                </div>
+                <p class="public-message">This is a shared view of study statistics. To track your own progress, <a href="javascript:location.href=location.href.split('?')[0]">create an account</a>.</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Firebase and Chart.js CDN -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/database.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/share.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
