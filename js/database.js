@@ -1,12 +1,12 @@
 // Firebase Realtime Database configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAaPXiofuCKdgmGgha8eIuVlLyzwJ0yZCk",
+  authDomain: "studytracker-cc817.firebaseapp.com",
+  databaseURL: "https://studytracker-cc817-default-rtdb.firebaseio.com",
+  projectId: "studytracker-cc817",
+  storageBucket: "studytracker-cc817.firebasestorage.app",
+  messagingSenderId: "232046780704",
+  appId: "1:232046780704:web:8451890f47181731c6f745"
 };
 
 // Initialize Firebase
